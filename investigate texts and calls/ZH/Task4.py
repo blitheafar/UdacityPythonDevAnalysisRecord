@@ -1,3 +1,4 @@
+# coding: utf-8
 """
 下面的文件将会从csv文件中读取读取短信与电话记录，
 你将在以后的课程中了解更多有关读取文件的知识。
@@ -26,3 +27,33 @@ with open('calls.csv', 'r') as f:
 电话号码不能重复，每行打印一条，按字典顺序排序后输出。
 """
 
+# 生成所有主叫电话号码，除去会发送和接收短信和被叫电话的号码
+
+# 生成主叫电话号码list，并去重
+call_list = []
+for call in calls:
+    call_list.append(call[0])
+call_list = set(call_list)
+# print(len(call_list))
+
+# 生成会发送和接收短信和被叫电话的号码list,并去重
+texter_list = []
+receive_text_list = []
+be_called_list = []
+for call in calls:
+    be_called_list.append(call[1])
+
+for text in texts:
+    texter_list.append(text[0])
+    receive_text_list.append(text[1])
+
+not_telemarketers_list = set(texter_list + receive_text_list + be_called_list)
+
+# print(len(not_telemarketers_list))
+
+telemarketers_list = call_list - not_telemarketers_list
+
+# 循环输出所有可能推销电话
+print("These numbers could be telemarketers: ")
+for telemarketers in telemarketers_list:
+    print(telemarketers)

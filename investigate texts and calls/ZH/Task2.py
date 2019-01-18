@@ -1,3 +1,4 @@
+# coding:utf-8
 """
 下面的文件将会从csv文件中读取读取短信与电话记录，
 你将在以后的课程中了解更多有关读取文件的知识。
@@ -22,4 +23,29 @@ September 2016.".
 如果键已经存在于字典内，为键所对应的值加上对应数值；
 如果键不存在于字典内，将此键加入字典，并将它的值设为给定值。
 """
+calls_dic = {}
+# 遍历通话List
+for call in calls:
+    # 当字典非空时
+    if calls_dic:
+        # 遍历字典
+        for key, value in calls_dic.items():
+            if call[0] == key:
+                calls_dic[key] = int(value) + int(call[3])
+            else:
+                calls_dic[call[0]] = int(call[3])
 
+            if call[1] == key:
+                calls_dic[key] = int(value) + int(call[3])
+            else:
+                calls_dic[call[1]] = int(call[3])
+    else:
+        # 字典为空时
+        calls_dic[call[0]] = int(call[3])
+        calls_dic[call[1]] = int(call[3])
+
+# 给字典value从大到小排序后输出第一个键
+for key, value in sorted(calls_dic.iteritems(), key=lambda (k, v): (v, k), reverse=True):
+    print "{} spent the longest time, {} seconds, on the phone during September 2016.".format(
+        key, value)
+    break
