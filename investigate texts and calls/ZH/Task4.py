@@ -52,6 +52,8 @@ not_telemarketers_list = set(texter_list + receive_text_list + be_called_list)
 # print(len(not_telemarketers_list))
 
 telemarketers_list = call_list - not_telemarketers_list
+telemarketers_list=list(telemarketers_list)
+telemarketers_list.sort()
 
 # 循环输出所有可能推销电话
 print("These numbers could be telemarketers: ")

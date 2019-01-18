@@ -44,8 +44,8 @@ call_by_080_list = []
 # 遍历通话list，找到被主叫号码前为(080)的所有被叫号码
 for call in calls:
     if call[0][:5] == "(080)":
-        if call[1][0] == '(':
-            # 固定电话，提取区号，括号内
+        if call[1][:2] == '(0':
+            # 固定电话，提取区号，有括号，0开头
             call_by_080_list.append(call[1].split(")")[0].split("(")[1])
         elif call[1][:3] == "140":
             # 促销员电话，提取区140
